@@ -13,7 +13,7 @@ radius = 150.0
 [node name="formation" type="KinematicBody2D"]
 position = Vector2( 494.539, 305.996 )
 collision_layer = 8
-collision_mask = 0
+collision_mask = 16
 script = ExtResource( 3 )
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -22,6 +22,7 @@ script = ExtResource( 3 )
 shape = SubResource( 1 )
 
 [node name="marker" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.239216 )
 rotation = 1.5708
 texture = ExtResource( 1 )
 
@@ -39,7 +40,7 @@ rotation = 1.5708
 position = Vector2( 50.0706, -66.8961 )
 rotation = 1.5708
 
-[node name="DummyCollision" type="CollisionShape2D" parent="."]
+[node name="Collision" type="CollisionShape2D" parent="."]
 visible = false
 shape = SubResource( 2 )
 
