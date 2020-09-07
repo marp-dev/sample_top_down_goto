@@ -9,6 +9,8 @@ var step
 
 var label_position
 
+export(Array, NodePath) var positions
+
 func _ready():
 	._ready()
 	states.movement = global.states.movement.new()
@@ -18,6 +20,7 @@ func _ready():
 	label_position = $Label.rect_position
 	in_range = true
 	add_to_group('formation')
+	setup_formation()
 
 func _input(event):
 	if Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right") or Input.is_action_pressed("ui_up") or Input.is_action_pressed("ui_down"):
@@ -77,8 +80,16 @@ func rotate_formation():
 	#$Label.text += "diff:" + String(rotation_diff) + "\n  current: " + String(current_rotation) +  "\n   global:" + String(global_rotation) + ")\n"
 	#$Label.text += "-diff:" + String(abs(rotation_diff) - (PI*2)) + "\n"
 
-func add_weapon(weapon):
+func get_weapon(weapon):
 	pass
+
+func setup_formation():
+	for i in range(0,positions.size()):
+		var position_path = $positions.get_child(i).get_path()
+		var member = get_node(positions[i])
+		if(member.has_method('follow') and position_path):
+			member.follow( position_path )
+
 
 #func _process_characters():
 #	for child in get_children():

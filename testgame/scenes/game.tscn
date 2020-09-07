@@ -9,18 +9,16 @@
 [node name="WeaponIcon" parent="." instance=ExtResource( 2 )]
 position = Vector2( 307.581, 177.053 )
 
-[node name="formation" parent="." instance=ExtResource( 1 )]
-
 [node name="Character" parent="." instance=ExtResource( 3 )]
 position = Vector2( 259.187, 451.072 )
-follow_to = NodePath("../formation/positions/position1")
 
 [node name="Character2" parent="." instance=ExtResource( 3 )]
 position = Vector2( 545.755, 59.0185 )
-follow_to = NodePath("../formation/positions/position2")
 
 [node name="Character3" parent="." instance=ExtResource( 3 )]
 position = Vector2( 158.976, 296.36 )
-follow_to = NodePath("../formation/positions/position3")
+
+[node name="formation" parent="." instance=ExtResource( 1 )]
+positions = [ NodePath("../Character"), NodePath("../Character2"), NodePath("../Character3") ]
 
 [editable path="formation"]

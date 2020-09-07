@@ -33,3 +33,10 @@ func add_weapon(weapon):
 	current_weapon.rotation = 0
 	#weapon.look_at(($RHandHold.position + Vector2(-1, -1)).normalized())
 	return true
+
+func follow(target):
+	if(typeof(target) == TYPE_NODE_PATH):
+		follow_to = target
+	elif(typeof(target) == TYPE_OBJECT):
+		follow_to = target.get_path()
+	state_change('follow')
