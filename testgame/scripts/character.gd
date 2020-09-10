@@ -13,7 +13,7 @@ func _ready():
 	add_to_group("character")
 
 	if follow_to:
-		state_change('follow')
+		state_change('follow', { "target": follow_to})
 
 func _process(delta):
 	logging += "state: " + current_state.name + "\n"
@@ -39,4 +39,4 @@ func follow(target):
 		follow_to = target
 	elif(typeof(target) == TYPE_OBJECT):
 		follow_to = target.get_path()
-	state_change('follow')
+	state_change('follow', { "target": follow_to})

@@ -11,6 +11,8 @@ var label_position
 
 export(Array, NodePath) var positions
 
+var members = []
+
 func _ready():
 	._ready()
 	states.movement = global.states.movement.new()
@@ -85,10 +87,13 @@ func get_weapon(weapon):
 
 func setup_formation():
 	for i in range(0,positions.size()):
-		var position_path = $positions.get_child(i).get_path()
+		var current_position = $positions.get_child(i)
+		var position_path = current_position.get_path()
 		var member = get_node(positions[i])
 		if(member.has_method('follow') and position_path):
 			member.follow( position_path )
+			members.append(member)
+			current_position.add_child(member)
 
 
 #func _process_characters():
