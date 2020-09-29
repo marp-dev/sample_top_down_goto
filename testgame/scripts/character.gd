@@ -1,4 +1,4 @@
-extends 'state_machine.gd'
+extends 'AI/state_machine_2D.gd'
 
 onready var logging = ""
 var label
@@ -9,7 +9,6 @@ export(NodePath) var follow_to
 func _ready():
 	._ready()
 	label = $Label
-	states.follow = global.states.follow.new()
 	add_to_group("character")
 
 	if follow_to:
@@ -40,3 +39,6 @@ func follow(target):
 	elif(typeof(target) == TYPE_OBJECT):
 		follow_to = target.get_path()
 	state_change('follow', { "target": follow_to})
+
+func go_to(target):
+	state_change('go_to', { "target": target})

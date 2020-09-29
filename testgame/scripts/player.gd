@@ -1,4 +1,4 @@
-extends 'state_machine.gd'
+extends 'AI/state_machine_2D.gd'
 
 onready var logging = ""
 var label

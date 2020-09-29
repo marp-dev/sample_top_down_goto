@@ -1,4 +1,4 @@
-extends 'state_machine.gd'
+extends 'AI/state_machine_2D.gd'
 
 var current_rotation
 var in_range
@@ -15,7 +15,6 @@ var members = []
 
 func _ready():
 	._ready()
-	states.movement = global.states.movement.new()
 	current_rotation = global_rotation
 	$positions.global_rotation = current_rotation
 	$Label.text = ""

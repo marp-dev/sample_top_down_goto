@@ -1,9 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://assets/spaceAstronauts_002.png" type="Texture" id=1]
 [ext_resource path="res://scripts/character.gd" type="Script" id=2]
-[ext_resource path="res://scripts/states/movement.gd" type="Script" id=3]
-[ext_resource path="res://scripts/states/idle.gd" type="Script" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 31.5074
@@ -23,14 +21,6 @@ position = Vector2( -18.5609, 1.19748 )
 shape = SubResource( 1 )
 
 [node name="weapons" type="Node2D" parent="."]
-
-[node name="states" type="Node2D" parent="."]
-
-[node name="idle" type="Node2D" parent="states"]
-script = ExtResource( 4 )
-
-[node name="movement" type="Node2D" parent="states"]
-script = ExtResource( 3 )
 
 [node name="Label" type="Label" parent="."]
 margin_left = 29.9169
