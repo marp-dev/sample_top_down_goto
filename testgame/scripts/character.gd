@@ -12,10 +12,10 @@ func _ready():
 	add_to_group("character")
 
 	if follow_to:
-		state_change('follow', { "target": follow_to})
+		state_change(STATE_FOLLOW, { "target": follow_to})
 
 func _process(delta):
-	logging += "state: " + current_state.name + "\n"
+	logging += "state: " + stack[0].name + "\n"
 	look_at(get_global_mouse_position())
 	._process(delta)
 	label.text = logging
@@ -38,7 +38,9 @@ func follow(target):
 		follow_to = target
 	elif(typeof(target) == TYPE_OBJECT):
 		follow_to = target.get_path()
-	state_change('follow', { "target": follow_to})
+	state_change(STATE_FOLLOW, { "target": follow_to})
 
 func go_to(target):
-	state_change('go_to', { "target": target})
+	if current_state() == STATE_GOTO:
+		eject_state()
+	state_change(STATE_GOTO, { "target": target})
