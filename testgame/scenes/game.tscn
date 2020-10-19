@@ -9,6 +9,12 @@
 [node name="WeaponIcon" parent="." instance=ExtResource( 2 )]
 position = Vector2( 307.581, 177.053 )
 
+[node name="WeaponIcon2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 981.335, 543.106 )
+
+[node name="WeaponIcon3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 513.731, 920.961 )
+
 [node name="Character" parent="." instance=ExtResource( 3 )]
 position = Vector2( 259.187, 451.072 )
 
@@ -20,5 +26,3 @@ position = Vector2( 158.976, 296.36 )
 
 [node name="formation" parent="." instance=ExtResource( 1 )]
 positions = [ NodePath("../Character"), NodePath("../Character2"), NodePath("../Character3") ]
-
-[editable path="formation"]

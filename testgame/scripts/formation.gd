@@ -28,6 +28,9 @@ func _input(event):
 		state_change(STATE_MOVEMENT)
 	else:
 		state_change(STATE_IDLE)
+	if Input.is_action_just_pressed("ui_fire"):
+		for member in members:
+			member.fire()
 	._input(event)
 
 func _process(delta):
@@ -82,7 +85,16 @@ func rotate_formation():
 	#$Label.text += "-diff:" + String(abs(rotation_diff) - (PI*2)) + "\n"
 
 func get_weapon(weapon):
-	pass
+	var min_distance = false
+	var close_member = false
+	for member in members:
+		var member_distance = member.global_position.distance_to(weapon.global_position)
+		if not member.has_weapon():
+			if not min_distance or member_distance < min_distance:
+				close_member = member
+				min_distance = member_distance
+	close_member.go_to(weapon.global_position)
+	return close_member
 
 func setup_formation():
 	for i in range(0,positions.size()):
