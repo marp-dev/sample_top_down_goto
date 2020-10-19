@@ -3,7 +3,6 @@
 [ext_resource path="res://scripts/Bullet.gd" type="Script" id=1]
 [ext_resource path="res://assets/ammo_pistol.png" type="Texture" id=2]
 
-
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 3.27199
 height = 5.65081
