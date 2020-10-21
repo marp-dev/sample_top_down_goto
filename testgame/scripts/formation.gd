@@ -30,7 +30,8 @@ func _input(event):
 		state_change(STATE_IDLE)
 	if Input.is_action_just_pressed("ui_fire"):
 		for member in members:
-			member.fire()
+			if not member.get_node('AimRay').is_colliding() or not member.get_node('AimRay').get_collider().is_in_group('character'):
+				member.fire()
 	._input(event)
 
 func _process(delta):
