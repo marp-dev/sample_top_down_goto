@@ -14,7 +14,7 @@ func _input(event):
 		state_change(STATE_MOVEMENT)
 	else:
 		state_change(STATE_IDLE)
-	if current_weapon and Input.is_action_pressed("ui_fire"):
+	if current_weapon and Input.is_action_just_pressed("ui_fire"):
 		current_weapon.fire()
 	._input(event)
 
