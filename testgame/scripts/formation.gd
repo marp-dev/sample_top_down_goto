@@ -45,7 +45,7 @@ func _process(delta):
 	else:
 		step = offrange_step
 
-	$Label.text += "global:" + String(global_rotation) + "\n"
+	$Label.text += "global: " + String(global_rotation) + "\n"
 	$Label.text += "current: " + String(current_rotation) + "\n"
 	rotate_formation()
 	._process(delta)
@@ -76,14 +76,12 @@ func rotate_formation():
 		current_rotation += clamp((-1 * current_rotation), -step, step)
 	
 	if toPI < to0:
-		current_rotation = clamp( current_rotation + clamp(current_rotation, -step, step) , -PI, PI)
-		if current_rotation == PI or current_rotation == -PI:
+		current_rotation += clamp((current_rotation), -step, step)
+		if ( current_rotation >= PI && current_rotation > 0 ) || ( current_rotation <= -PI && current_rotation < 0 ):
 			current_rotation = -current_rotation
-
-	$positions.global_rotation = current_rotation
 	
-	#$Label.text += "diff:" + String(rotation_diff) + "\n  current: " + String(current_rotation) +  "\n   global:" + String(global_rotation) + ")\n"
-	#$Label.text += "-diff:" + String(abs(rotation_diff) - (PI*2)) + "\n"
+	$positions.global_rotation = current_rotation
+
 
 func get_weapon(weapon):
 	var min_distance = false
