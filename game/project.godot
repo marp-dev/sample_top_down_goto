@@ -14,7 +14,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="sample_top_down_gotoTest"
+config/name="sample_top_down_goto"
 run/main_scene="res://scenes/GoToTest.tscn"
 config/icon="res://icon.png"
 
