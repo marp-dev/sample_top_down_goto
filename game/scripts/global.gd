@@ -1,6 +1,7 @@
 extends Node
 
 
+const DEBUG = true
 
 var weapons
 var pointer

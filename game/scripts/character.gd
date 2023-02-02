@@ -16,6 +16,9 @@ func _ready():
 
 	if follow_to:
 		state_change(STATE_FOLLOW, { "target": follow_to})
+	
+	if not global.DEBUG:
+		label.hide()
 
 func _process(delta):
 	logging += "state: " + stack[0].name + "\n"
