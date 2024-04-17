@@ -25,10 +25,13 @@ func handle_input(event):
 
 func update(delta):
 	if target:
-		var motion
 		var direction = (target.global_position - parent.global_position).normalized()
-		motion = direction * parent.SPEED
-		parent.move_and_slide(motion)
+		var distance = parent.global_position.distance_to(target.global_position)
+		var motion = direction * parent.SPEED * delta
+		if distance < 5:
+			motion *= ((distance - 2) / 3)
+		parent.set_velocity( motion )
+		parent.move_and_slide()
 
 #func _on_animation_finished(anim_name):
 #	return

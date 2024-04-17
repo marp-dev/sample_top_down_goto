@@ -1,12 +1,12 @@
 extends 'AI/state_machine_2D.gd'
 
-onready var logging = ""
-var label
+@onready var logging = ""
+@onready var label = $Logging/Label
+var SPEED = 17000
 var current_weapon
 
 func _ready():
-	._ready()
-	label = $Label
+	super._ready()
 	add_to_group("player")
 
 func _input(event):
@@ -16,12 +16,13 @@ func _input(event):
 		state_change(STATE_IDLE)
 	if current_weapon and Input.is_action_just_pressed("ui_fire"):
 		current_weapon.fire()
-	._input(event)
+	super._input(event)
 
 func _process(delta):
 	logging += "state: " + stack[0].name + "\n"
 	look_at(get_global_mouse_position())
-	._process(delta)
+	super._process(delta)
+	$Logging.global_rotation_degrees = 0.0
 	label.text = logging
 	logging = ""
 

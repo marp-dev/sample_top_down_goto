@@ -25,7 +25,10 @@ func handle_input(event):
 	pass
 
 func update(delta):
-	parent.move_and_slide(motion, UP)
+	parent.set_velocity(motion)
+	parent.set_up_direction(UP)
+	parent.move_and_slide()
+	parent.velocity
 
 #func _on_animation_finished(anim_name):
 #	return

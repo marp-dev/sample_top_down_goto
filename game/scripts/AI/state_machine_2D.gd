@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 var states_path = {
 	"STATE_IDLE": preload("states_2D/idle.gd"),
@@ -28,7 +28,7 @@ func _process(delta):
 
 func state_change(state = STATE_IDLE, props = {}):
 	stack.push_front( states_path[state].new() )
-	stack[0].connect('finished', self, 'on_finished', [stack[0].name])
+	stack[0].connect('finished', Callable(self, 'on_finished').bind(stack[0].name))
 	props['owner'] = self
 	stack[0].enter(props)
 
@@ -38,8 +38,8 @@ func on_finished(state_name):
 
 
 func eject_state():
-	if( !stack.empty() ):
-		stack[0].disconnect('finished', self, 'on_finished')
+	if( !stack.is_empty() ):
+		stack[0].disconnect('finished', Callable(self, 'on_finished'))
 		stack[0].exit()
 		stack.pop_front()
 

@@ -4,7 +4,7 @@ extends Node2D
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-onready var marker = null
+@onready var marker = null
 
 # Called when the node enters the scene tree for the first time.
 
@@ -17,10 +17,10 @@ func _input(event):
 		var mouse_position = get_global_mouse_position()
 		$Character.go_to( mouse_position )
 		remove_marker()
-		marker = load("res://scenes/TestMarker.tscn").instance()
+		marker = load("res://scenes/TestMarker.tscn").instantiate()
 		add_child(marker)
 		marker.global_position = mouse_position
-		marker.connect("body_entered", self, "remove_marker")
+		marker.connect("body_entered", Callable(self, "remove_marker"))
 
 func remove_marker(body = null):
 	if marker != null:

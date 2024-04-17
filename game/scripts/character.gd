@@ -1,31 +1,31 @@
 extends 'AI/state_machine_2D.gd'
 
-onready var logging = ""
-var label
-onready var current_weapon = null
-var SPEED = 100
-export(NodePath) var follow_to
+@onready var logging = ""
+@onready var current_weapon = null
+var SPEED = 17000
+@export var follow_to: NodePath
 
 var goto_call_obj
 var goto_call_method
 
 func _ready():
-	._ready()
-	label = $Label
+	super._ready()
 	add_to_group("character")
 
 	if follow_to:
 		state_change(STATE_FOLLOW, { "target": follow_to})
 	
 	if not global.DEBUG:
-		label.hide()
+		$Logging/Label.hide()
 
 func _process(delta):
 	logging += "state: " + stack[0].name + "\n"
 	look_at(get_global_mouse_position())
-	._process(delta)
-	label.text = logging
+	super._process(delta)
+	$Logging/Label.text = logging
 	logging = ""
+	$Logging.global_rotation_degrees = 0.0
+
 
 func add_weapon(weapon):
 	if not weapon.is_in_group('weapon'):
@@ -64,7 +64,7 @@ func on_finished(state_name):
 	if state_name == STATE_GOTO:
 		if goto_call_obj and goto_call_obj.has_method(goto_call_method):
 			goto_call_obj.call(goto_call_method)
-	.on_finished(state_name)
+	super.on_finished(state_name)
 
 
 func fire():

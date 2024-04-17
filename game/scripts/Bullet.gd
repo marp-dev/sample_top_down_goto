@@ -4,7 +4,7 @@ var firedby
 
 
 func _ready():
-	connect('body_entered', self, 'collision_handler')
+	connect('body_entered', Callable(self, 'collision_handler'))
 
 
 func collision_handler(body):

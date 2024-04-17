@@ -40,15 +40,13 @@ func update(delta):
 	if invalid:
 		return false;
 	
-	if target_node != null:
-		target = target_node.global_position
-	
 	if parent.global_position.distance_to(target) < 2:
 		emit_signal("finished")
 	
 	var direction = (target - parent.global_position).normalized()
-	var motion = direction * parent.SPEED
-	parent.move_and_slide(motion)
+	var motion = direction * parent.SPEED * delta
+	parent.set_velocity(motion)
+	parent.move_and_slide()
 
 
 #func _on_animation_finished(anim_name):
