@@ -27,6 +27,8 @@ func state(state = DEFAULT_STATE, props = {}):
 	if not $states:
 		push_warning('there is no states child in state machine')
 		return
+	if not stack.is_empty() and stack[0].name == state:
+		return
 	var state_node = $states.get_node(state)
 	if not state_node:
 		return false
