@@ -39,6 +39,8 @@ func handle_input(event):
 		motion.y = 1 * parent.SPEED
 	else:
 		motion.y = 0
+	if motion.x == 0 and motion.y == 0:
+		finished.emit(name)
 
 func update(delta):
 	parent.set_velocity(motion * delta)

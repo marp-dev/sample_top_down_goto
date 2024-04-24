@@ -13,8 +13,7 @@ func _ready():
 func _input(event):
 	if Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right") or Input.is_action_pressed("ui_up") or Input.is_action_pressed("ui_down"):
 		enter('STATE_MOVEMENT')
-	else:
-		enter('STATE_IDLE')
+
 	if current_weapon and Input.is_action_just_pressed("ui_fire"):
 		current_weapon.fire()
 	super._input(event)
