@@ -15,7 +15,7 @@ var stack = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	state_change()
+	state()
 
 
 func _input(event):
@@ -26,7 +26,7 @@ func _process(delta):
 	stack[0].update(delta)
 
 
-func state_change(state = STATE_IDLE, props = {}):
+func state(state = STATE_IDLE, props = {}):
 	stack.push_front( states_path[state].new() )
 	stack[0].finished.connect(on_finished)
 	props['owner'] = self

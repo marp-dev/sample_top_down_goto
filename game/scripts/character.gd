@@ -13,7 +13,7 @@ func _ready():
 	add_to_group("character")
 
 	if follow_to:
-		state_change(STATE_FOLLOW, { "target": follow_to})
+		state(STATE_FOLLOW, { "target": follow_to})
 	
 	if not global.DEBUG:
 		$Logging/Label.hide()
@@ -49,12 +49,12 @@ func follow(target):
 		follow_to = target
 	elif(typeof(target) == TYPE_OBJECT):
 		follow_to = target.get_path()
-	state_change(STATE_FOLLOW, { "target": follow_to})
+	state(STATE_FOLLOW, { "target": follow_to})
 
 func go_to(target, obj = false, method = false):
 	if current_state() == STATE_GOTO:
 		eject_state()
-	state_change(STATE_GOTO, { "target": target})
+	state(STATE_GOTO, { "target": target})
 	if obj and method:
 		goto_call_obj = obj
 		goto_call_method = method
