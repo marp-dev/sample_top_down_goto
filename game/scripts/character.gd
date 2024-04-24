@@ -9,17 +9,19 @@ var goto_call_obj
 var goto_call_method
 
 func _ready():
+	DEFAULT_STATE = 'STATE_IDLE'
 	super._ready()
 	add_to_group("character")
 
 	if follow_to:
-		state(STATE_FOLLOW, { "target": follow_to})
+		state('STATE_FOLLOW', { "target": follow_to})
 	
 	if not global.DEBUG:
 		$Logging/Label.hide()
 
 func _process(delta):
-	logging += "state: " + stack[0].name + "\n"
+	if not stack.is_empty():
+		logging += "state: " + stack[0].name + "\n"
 	look_at(get_global_mouse_position())
 	super._process(delta)
 	$Logging/Label.text = logging
@@ -49,19 +51,19 @@ func follow(target):
 		follow_to = target
 	elif(typeof(target) == TYPE_OBJECT):
 		follow_to = target.get_path()
-	state(STATE_FOLLOW, { "target": follow_to})
+	state('STATE_FOLLOW', { "target": follow_to})
 
 func go_to(target, obj = false, method = false):
-	if current_state() == STATE_GOTO:
+	if current_state() == 'STATE_GOTO':
 		eject_state()
-	state(STATE_GOTO, { "target": target})
+	state('STATE_GOTO', { "target": target})
 	if obj and method:
 		goto_call_obj = obj
 		goto_call_method = method
 
 
 func on_finished(state_name):
-	if state_name == STATE_GOTO:
+	if state_name == 'STATE_GOTO':
 		if goto_call_obj and goto_call_obj.has_method(goto_call_method):
 			goto_call_obj.call(goto_call_method)
 	super.on_finished(state_name)

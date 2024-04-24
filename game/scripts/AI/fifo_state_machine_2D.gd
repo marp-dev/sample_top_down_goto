@@ -1,15 +1,6 @@
 extends CharacterBody2D
 
-var states_path = {
-	"STATE_IDLE": preload("states_2D/idle.gd"),
-	"STATE_GOTO": preload("states_2D/go_to.gd"),
-	"STATE_FOLLOW": preload("states_2D/follow.gd"),
-	"STATE_MOVEMENT": preload("states_2D/movement.gd"),
-}
-const STATE_IDLE = "STATE_IDLE"
-const STATE_GOTO = "STATE_GOTO"
-const STATE_FOLLOW = "STATE_FOLLOW"
-const STATE_MOVEMENT = "STATE_MOVEMENT"
+var DEFAULT_STATE = null
 var stack = []
 
 
@@ -19,15 +10,25 @@ func _ready():
 
 
 func _input(event):
+	if stack.is_empty():
+		return false
 	stack[0].handle_input(event)
 
 
 func _process(delta):
+	if stack.is_empty():
+		return false
 	stack[0].update(delta)
 
 
-func state(state = STATE_IDLE, props = {}):
-	stack.push_front( states_path[state].new() )
+func state(state = DEFAULT_STATE, props = {}):
+	if not state:
+		return
+	if not $states:
+		push_warning('there is no states child in state machine')
+		return
+	var state_node = $states.get_node(state)
+	stack.push_front( state_node )
 	stack[0].finished.connect(on_finished)
 	props['owner'] = self
 	stack[0].enter(props)
@@ -45,4 +46,6 @@ func eject_state():
 
 
 func current_state():
+	if stack.is_empty():
+		return ""
 	return stack[0].name

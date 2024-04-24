@@ -6,20 +6,22 @@ var SPEED = 17000
 var current_weapon
 
 func _ready():
+	DEFAULT_STATE = 'STATE_IDLE'
 	super._ready()
 	add_to_group("player")
 
 func _input(event):
 	if Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right") or Input.is_action_pressed("ui_up") or Input.is_action_pressed("ui_down"):
-		state(STATE_MOVEMENT)
+		state('STATE_MOVEMENT')
 	else:
-		state(STATE_IDLE)
+		state('STATE_IDLE')
 	if current_weapon and Input.is_action_just_pressed("ui_fire"):
 		current_weapon.fire()
 	super._input(event)
 
 func _process(delta):
-	logging += "state: " + stack[0].name + "\n"
+	if not stack.is_empty():
+		logging += "state: " + stack[0].name + "\n"
 	look_at(get_global_mouse_position())
 	super._process(delta)
 	$Logging.global_rotation_degrees = 0.0
