@@ -1,4 +1,4 @@
-extends 'AI/state_machine_2D.gd'
+extends 'AI/fifo_state_machine_2D.gd'
 
 @onready var logging = ""
 @onready var current_weapon = null
