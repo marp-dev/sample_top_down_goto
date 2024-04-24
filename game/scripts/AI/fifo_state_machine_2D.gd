@@ -6,7 +6,7 @@ var stack = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	state()
+	enter()
 
 
 func _input(event):
@@ -21,7 +21,7 @@ func _process(delta):
 	stack[0].update(delta)
 
 
-func state(state = DEFAULT_STATE, props = {}):
+func enter(state = DEFAULT_STATE, props = {}):
 	if not state:
 		return
 	if not $states:
@@ -39,10 +39,10 @@ func state(state = DEFAULT_STATE, props = {}):
 
 
 func on_finished(state_name):
-	eject_state()
+	exit()
 
 
-func eject_state():
+func exit():
 	if not stack.is_empty():
 		stack[0].finished.disconnect(on_finished)
 		stack[0].exit()
