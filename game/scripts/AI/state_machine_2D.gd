@@ -28,7 +28,7 @@ func _process(delta):
 
 func state_change(state = STATE_IDLE, props = {}):
 	stack.push_front( states_path[state].new() )
-	stack[0].connect('finished', Callable(self, 'on_finished').bind(stack[0].name))
+	stack[0].finished.connect(on_finished)
 	props['owner'] = self
 	stack[0].enter(props)
 
@@ -38,8 +38,8 @@ func on_finished(state_name):
 
 
 func eject_state():
-	if( !stack.is_empty() ):
-		stack[0].disconnect('finished', Callable(self, 'on_finished'))
+	if not stack.is_empty():
+		stack[0].finished.disconnect(on_finished)
 		stack[0].exit()
 		stack.pop_front()
 

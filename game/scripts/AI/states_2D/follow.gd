@@ -1,6 +1,6 @@
 extends Node
 
-signal finished
+signal finished(ref)
 
 #var UP
 var logging

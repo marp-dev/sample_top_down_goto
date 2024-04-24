@@ -1,6 +1,6 @@
 extends Node
 
-signal finished
+signal finished(ref)
 
 var UP
 var motion
@@ -26,7 +26,6 @@ func handle_input(event):
 
 func update(delta):
 	parent.set_velocity(motion)
-	parent.set_up_direction(UP)
 	parent.move_and_slide()
 	parent.velocity
 

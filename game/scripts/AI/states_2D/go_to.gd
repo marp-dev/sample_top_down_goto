@@ -1,6 +1,6 @@
 extends Node
 
-signal finished
+signal finished(ref)
 
 var UP
 var motion
@@ -41,7 +41,7 @@ func update(delta):
 		return false;
 	
 	if parent.global_position.distance_to(target) < 2:
-		emit_signal("finished")
+		finished.emit(name)
 	
 	var direction = (target - parent.global_position).normalized()
 	var motion = direction * parent.SPEED * delta
