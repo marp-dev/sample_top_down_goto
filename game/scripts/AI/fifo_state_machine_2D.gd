@@ -28,6 +28,8 @@ func state(state = DEFAULT_STATE, props = {}):
 		push_warning('there is no states child in state machine')
 		return
 	var state_node = $states.get_node(state)
+	if not state_node:
+		return false
 	stack.push_front( state_node )
 	stack[0].finished.connect(on_finished)
 	props['owner'] = self
