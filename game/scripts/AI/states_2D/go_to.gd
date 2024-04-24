@@ -11,7 +11,6 @@ var invalid = false
 
 # Initialize the state. E.g. change the animation
 func enter(props = {}):
-	name = "STATE_GOTO"
 	parent = owner
 	if props['owner']:
 		parent = props['owner']

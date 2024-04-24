@@ -9,7 +9,6 @@ var target
 
 # Initialize the state. E.g. change the animation
 func enter(props = {}):
-	name = "STATE_FOLLOW"
 	parent = owner
 	if props['owner'] != null:
 		parent = props['owner']

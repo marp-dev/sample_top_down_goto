@@ -9,7 +9,6 @@ var parent
 
 # Initialize the state. E.g. change the animation
 func enter(props = {}):
-	name = "STATE_MOVEMENT"
 	parent = owner
 	if props['owner']:
 		parent = props['owner']
