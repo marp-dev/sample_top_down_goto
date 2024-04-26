@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bubmknvpo7iua" path="res://assets/spaceAstronauts_002.png" id="1"]
 [ext_resource type="Script" path="res://scripts/character.gd" id="2"]
-[ext_resource type="Script" path="res://scripts/AI/states_2D/idle.gd" id="3_ustoj"]
+[ext_resource type="Script" path="res://scripts/AI/states_2D/idle-until-key.gd" id="3_ustoj"]
 [ext_resource type="Script" path="res://scripts/AI/states_2D/go_to.gd" id="4_xxgw5"]
 [ext_resource type="Script" path="res://scripts/AI/states_2D/follow.gd" id="5_6ejdt"]
 [ext_resource type="Script" path="res://scripts/AI/states_2D/movement.gd" id="6_nfdab"]
