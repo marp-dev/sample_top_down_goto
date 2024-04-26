@@ -7,19 +7,30 @@ var motion
 var logging
 var parent
 
+
 # Initialize the state. E.g. change the animation
 func enter(props = {}):
-	parent = owner
-	if props['owner']:
-		parent = props['owner']
-	#UP = Vector2(0,-1)
+	parent = props['owner'] if props.has('owner') else owner
+	reconnect()
 	motion = Vector2()
 	motion.x = 0
 	motion.y = 0
 
+
 # Clean up the state. Reinitialize values like a timer
 func exit():
-	pass
+	halt()
+
+
+func reconnect():
+	parent.handle_input.connect(handle_input)
+	parent.update.connect(update)
+
+
+func halt():
+	parent.handle_input.disconnect(handle_input)
+	parent.update.disconnect(update)
+
 
 func handle_input(event):
 	if Input.is_action_pressed("ui_left") and Input.is_action_pressed("ui_right"):
@@ -42,10 +53,11 @@ func handle_input(event):
 	if motion.x == 0 and motion.y == 0:
 		finished.emit(name)
 
+
 func update(delta):
 	parent.set_velocity(motion * delta)
 	parent.move_and_slide()
-	#parent.velocity
+
 
 #func _on_animation_finished(anim_name):
 #	return
