@@ -1,4 +1,4 @@
-extends 'AI/fifo_state_machine_2D.gd'
+extends 'AI/parallel_state_machine_2D.gd'
 
 @onready var logging = ""
 @onready var label = $Logging/Label
@@ -15,12 +15,12 @@ func _input(event):
 		enter('STATE_MOVEMENT')
 
 	if current_weapon and Input.is_action_just_pressed("ui_fire"):
-		current_weapon.fire()
+		enter('STATE_FIRE')
 	super._input(event)
 
 func _process(delta):
-	if not stack.is_empty():
-		logging += "state: " + stack[0].name + "\n"
+	if not state_list.is_empty():
+		logging += "state: " + current_state() + "\n"
 	look_at(get_global_mouse_position())
 	super._process(delta)
 	$Logging.global_rotation_degrees = 0.0
