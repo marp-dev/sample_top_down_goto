@@ -1,6 +1,6 @@
 extends Node2D
 
-var FIRERATE = 1
+var FIRERATE = 0.2
 var BULLET_SPEED = 800
 var timer
 var weilder
