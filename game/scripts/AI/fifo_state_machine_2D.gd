@@ -69,13 +69,6 @@ func enter(state = DEFAULT_STATE, props = {}):
 	stack[0].enter(props)
 
 
-func get_path_parent(node_path):
-	var names = []
-	for i in range(0,node_path.get_name_count() - 1):
-		names.push_back(node_path.get_name(i))
-	return NodePath( '/'.join(names) )
-
-
 func on_finished(state_name):
 	exit(state_name)
 

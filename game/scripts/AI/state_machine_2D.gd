@@ -24,3 +24,10 @@ func setup(instance = null):
 	for node in states.get_tree().get_nodes_in_group("state_machine"):
 		if states.is_ancestor_of(node):
 			node.setup(parent)
+
+
+func get_path_parent(node_path):
+	var states = parent.get_node('states')
+	var child_state = states.get_node(node_path)
+	return states.get_path_to(child_state.get_parent())
+

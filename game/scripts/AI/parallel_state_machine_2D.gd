@@ -67,12 +67,6 @@ func enter(state = DEFAULT_STATE, props = {}):
 	state_list[state].enter(props)
 
 
-func get_path_parent(node_path):
-	var states = parent.get_node('states')
-	var child_state = states.get_node(node_path)
-	return states.get_path_to(child_state.get_parent())
-
-
 func on_finished(state_name):
 	exit(state_name)
 
