@@ -1,5 +1,6 @@
 extends RigidBody2D
 
+
 var firedby
 
 
@@ -9,3 +10,4 @@ func _ready():
 
 func collision_handler(body):
 	queue_free()
+

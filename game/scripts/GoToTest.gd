@@ -6,8 +6,8 @@ extends Node2D
 # var b = "text"
 @onready var marker = null
 
-# Called when the node enters the scene tree for the first time.
 
+# Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
 
@@ -22,7 +22,9 @@ func _input(event):
 		marker.global_position = mouse_position
 		marker.connect("body_entered", Callable(self, "remove_marker"))
 
+
 func remove_marker(body = null):
 	if marker != null:
 		marker.remove()
 		marker = null
+
