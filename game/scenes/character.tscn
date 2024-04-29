@@ -1,11 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://dr5uiuuufocw"]
+[gd_scene load_steps=9 format=3 uid="uid://dr5uiuuufocw"]
 
 [ext_resource type="Texture2D" uid="uid://bubmknvpo7iua" path="res://assets/spaceAstronauts_002.png" id="1"]
 [ext_resource type="Script" path="res://scripts/character.gd" id="2"]
 [ext_resource type="Script" path="res://scripts/AI/states_2D/idle-until-key.gd" id="3_ustoj"]
 [ext_resource type="Script" path="res://scripts/AI/states_2D/go_to.gd" id="4_xxgw5"]
 [ext_resource type="Script" path="res://scripts/AI/states_2D/follow.gd" id="5_6ejdt"]
-[ext_resource type="Script" path="res://scripts/AI/states_2D/movement.gd" id="6_nfdab"]
+[ext_resource type="Script" path="res://scripts/AI/fifo_state_machine_2D.gd" id="5_68gya"]
+[ext_resource type="Script" path="res://scripts/AI/states_2D/fire.gd" id="6_x5q3v"]
 
 [sub_resource type="CapsuleShape2D" id="1"]
 radius = 31.0
@@ -52,11 +53,14 @@ metadata/_edit_use_anchors_ = true
 [node name="STATE_IDLE" type="Node2D" parent="states"]
 script = ExtResource("3_ustoj")
 
-[node name="STATE_GOTO" type="Node2D" parent="states"]
+[node name="STATE_FIRE" type="Node2D" parent="states"]
+script = ExtResource("6_x5q3v")
+
+[node name="MOVEMENT" type="CharacterBody2D" parent="states"]
+script = ExtResource("5_68gya")
+
+[node name="STATE_GOTO" type="Node2D" parent="states/MOVEMENT"]
 script = ExtResource("4_xxgw5")
 
-[node name="STATE_FOLLOW" type="Node2D" parent="states"]
+[node name="STATE_FOLLOW" type="Node2D" parent="states/MOVEMENT"]
 script = ExtResource("5_6ejdt")
-
-[node name="STATE_MOVEMENT" type="Node2D" parent="states"]
-script = ExtResource("6_nfdab")
