@@ -29,7 +29,7 @@ func enter(props = {}):
 
 
 # Clean up the state. Reinitialize values like a timer
-func exit():
+func exit(state_name = null):
 	halt()
 	#timer.free()
 	motion = null
@@ -67,7 +67,7 @@ func fire():
 		bullet.add_to_group('bullet')
 		bullet.global_position = weapon.get_node('FiringPoint').global_position
 		bullet.global_rotation = weapon.global_rotation
-		bullet.add_collision_exception_with(self)
+		#bullet.add_collision_exception_with(self)
 		bullet.set_linear_velocity(direction * weapon.BULLET_SPEED)
 		timer.start(weapon.FIRERATE)
 		return

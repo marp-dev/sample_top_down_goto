@@ -17,7 +17,7 @@ func enter(props = {}):
 
 
 # Clean up the state. Reinitialize values like a timer
-func exit():
+func exit(state_name = null):
 	halt()
 
 

@@ -7,6 +7,7 @@ var logging
 var parent
 var target
 
+
 # Initialize the state. E.g. change the animation
 func enter(props = {}):
 	parent = props['owner'] if props.has('owner') else owner
@@ -14,8 +15,9 @@ func enter(props = {}):
 	if props['target'] != null:
 		target = parent.get_node(props['target'])
 
+
 # Clean up the state. Reinitialize values like a timer
-func exit():
+func exit(state_name = null):
 	halt()
 
 
@@ -43,5 +45,3 @@ func update(delta):
 		parent.set_velocity( motion )
 		parent.move_and_slide()
 
-#func _on_animation_finished(anim_name):
-#	return

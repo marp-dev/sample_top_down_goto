@@ -18,7 +18,7 @@ func enter(props = {}):
 
 
 # Clean up the state. Reinitialize values like a timer
-func exit():
+func exit(state_name = null):
 	halt()
 
 
@@ -58,6 +58,3 @@ func update(delta):
 	parent.set_velocity(motion * delta)
 	parent.move_and_slide()
 
-
-#func _on_animation_finished(anim_name):
-#	return
