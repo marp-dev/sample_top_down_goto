@@ -59,5 +59,8 @@ func go_to(target, obj = false, method = false):
 
 
 func fire():
-	if current_weapon != null:
-		enter('STATE_FIRE')
+	if not current_weapon:
+		return
+	if $AimRay.is_colliding() and $AimRay.get_collider().is_in_group('character'):
+		return
+	enter('STATE_FIRE')
