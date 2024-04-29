@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://mm0xpstfdehi"]
+
+[ext_resource type="Texture2D" uid="uid://cfqw0ykp27it" path="res://assets/graph-paper.svg" id="1_vklkt"]
+
+[sub_resource type="Gradient" id="Gradient_i7jcc"]
+colors = PackedColorArray(0, 0, 0.277344, 1, 0.00112915, 0.00112915, 0.289062, 1)
+
+[sub_resource type="GradientTexture2D" id="2"]
+gradient = SubResource("Gradient_i7jcc")
+width = 800
+height = 600
+repeat = 1
+
+[node name="ParallaxBackground" type="ParallaxBackground"]
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
+position = Vector2(-1000, -1000)
+motion_mirroring = Vector2(2000, 2000)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer2"]
+texture = SubResource("2")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 2000, 2000)
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+show_behind_parent = true
+position = Vector2(-1000, -1000)
+motion_mirroring = Vector2(2000, 2000)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer"]
+modulate = Color(1, 1, 1, 0.27451)
+texture_repeat = 3
+texture = ExtResource("1_vklkt")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 2000, 2000)
