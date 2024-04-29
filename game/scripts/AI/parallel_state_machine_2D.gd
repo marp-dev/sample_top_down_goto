@@ -77,11 +77,15 @@ func on_finished(state_name):
 	exit(state_name)
 
 
-func exit(state_name):
+func stop(state_name):
 	if state_list.has(state_name):
 		state_list[state_name].finished.disconnect(on_finished)
 		state_list[state_name].exit()
 		state_list.erase(state_name)
+
+
+func exit(state_name):
+	stop(state_name)
 	if state_list.is_empty():
 		if DEFAULT_STATE:
 			enter()

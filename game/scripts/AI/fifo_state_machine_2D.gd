@@ -80,20 +80,28 @@ func on_finished(state_name):
 	exit(state_name)
 
 
-func exit(state_name = null):
-	if not stack.is_empty():
+func stop(state_name = null):
+	if (
+		not stack.is_empty() and 
+		(not state_name or stack[0].name == state_name)
+		):
 		stack[0].finished.disconnect(on_finished)
 		stack[0].exit(state_name)
 		stack.pop_front()
+
+
+func exit(state_name = null):
+	stop(state_name)
+	if not stack.is_empty():
 		reconnect()
-	if stack.is_empty():
-		if DEFAULT_STATE:
-			enter()
-			return
-		if parent == self:
-			finished.emit(name)
-			return
-		finished.emit(parent.get_node('states').get_path_to(self))
+		return
+	if DEFAULT_STATE:
+		enter()
+		return
+	if parent == self:
+		finished.emit(name)
+		return
+	finished.emit(parent.get_node('states').get_path_to(self))
 
 
 func reconnect():
