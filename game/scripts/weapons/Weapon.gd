@@ -20,5 +20,5 @@ func fire():
 		bullet.global_position = $FiringPoint.global_position
 		bullet.global_rotation = global_rotation
 		bullet.set_linear_velocity(direction * BULLET_SPEED)
-		bullet.add_collision_exception_with(self)
+		#bullet.add_collision_exception_with(self)
 		timer.start()
