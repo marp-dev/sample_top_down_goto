@@ -48,18 +48,23 @@ func enter(state = DEFAULT_STATE, props = {}):
 			call_name = NodePath(node_path.get_name(name_count - 1))
 			state = state_parent_path
 			nested = true
-	
-	if not nested and not stack.is_empty() and String(stack[0].name) == String(state):
-		exit(String(stack[0].name))
+
 	if not nested:
 		if parent == self:
 			state_node = states.get_node(state)
 		else:
 			state_node = self.get_node(state)
+
+	if not stack.is_empty():
+		if nested and stack[0] == state_node:
+			pass
+		elif not nested and stack[0] == state_node:
+			stop(String(stack[0].name))
+		else:
+			stack[0].halt()
+
 	if not state_node:
 		return false
-	if not stack.is_empty():
-		stack[0].halt()
 	stack.push_front( state_node )
 	if not stack[0].finished.is_connected(on_finished):
 		stack[0].finished.connect(on_finished)
