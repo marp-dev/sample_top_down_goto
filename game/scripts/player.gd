@@ -7,7 +7,8 @@ var current_weapon
 
 func _ready():
 	DEFAULT_STATE = 'STATE_IDLE'
-	super._ready()
+	setup()
+	enter()
 	add_to_group("player")
 
 func _input(event):

@@ -1,16 +1,16 @@
-extends 'AI/fifo_state_machine_2D.gd'
+extends 'AI/parallel_state_machine_2D.gd'
+
 
 @onready var logging = ""
 @onready var current_weapon = null
 var SPEED = 17000
 @export var follow_to: NodePath
 
-var goto_call_obj
-var goto_call_method
 
 func _ready():
 	DEFAULT_STATE = 'STATE_IDLE'
-	super._ready()
+	setup()
+	enter()
 	add_to_group("character")
 
 	if follow_to:
@@ -19,9 +19,10 @@ func _ready():
 	if not global.DEBUG:
 		$Logging/Label.hide()
 
+
 func _process(delta):
-	if not stack.is_empty():
-		logging += "state: " + stack[0].name + "\n"
+	if not state_list.is_empty():
+		logging += "state: " + current_state() + "\n"
 	look_at(get_global_mouse_position())
 	super._process(delta)
 	$Logging/Label.text = logging
@@ -51,24 +52,12 @@ func follow(target):
 		follow_to = target
 	elif(typeof(target) == TYPE_OBJECT):
 		follow_to = target.get_path()
-	enter('STATE_FOLLOW', { "target": follow_to})
+	enter('MOVEMENT/STATE_FOLLOW', { "target": follow_to})
 
 func go_to(target, obj = false, method = false):
-	if current_state() == 'STATE_GOTO':
-		exit()
-	enter('STATE_GOTO', { "target": target})
-	if obj and method:
-		goto_call_obj = obj
-		goto_call_method = method
-
-
-func on_finished(state_name):
-	if state_name == 'STATE_GOTO':
-		if goto_call_obj and goto_call_obj.has_method(goto_call_method):
-			goto_call_obj.call(goto_call_method)
-	super.on_finished(state_name)
+	enter('MOVEMENT/STATE_GOTO', { "target": target})
 
 
 func fire():
 	if current_weapon != null:
-		current_weapon.fire()
+		enter('STATE_FIRE')
