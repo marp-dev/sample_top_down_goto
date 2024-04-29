@@ -110,4 +110,12 @@ func current_state():
 
 
 func current_states():
-	return state_list.keys()
+	var current = []
+	var states = parent.get_node('states')
+	for key in state_list.keys():
+		var state_name = String(key)
+		if states.is_ancestor_of(state_list[key]) and state_list[key].has_method('current_state'):
+			state_name = String(key) + "/" + String(state_list[key].current_state()) 
+		current.push_back(state_name)
+	return current
+
