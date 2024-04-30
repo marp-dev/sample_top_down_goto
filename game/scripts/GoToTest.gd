@@ -1,15 +1,26 @@
 extends Node2D
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+signal log_all(text, ref)
 @onready var marker = null
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	if not global.DEBUG:
+		return
+	var logging = preload("res://scenes/Logging.tscn")
+	for unit in [$Character]:
+		var logger = logging.instantiate()
+		unit.add_child(logger)
+		logger.offset_position = Vector2(80,-80)
+		var log_text_call = func(text, ref):
+			log_text(text, ref)
+		log_all.connect(log_text_call.bind(logger))
+
+
+func log_text(text, ref):
+	ref.text += text
 
 
 func _input(event):
@@ -27,4 +38,12 @@ func remove_marker(body = null):
 	if marker != null:
 		marker.remove()
 		marker = null
+
+
+func _process(delta):
+	if not global.DEBUG:
+		return
+	$Character.get_node('Logging').text += 'states:\n'
+	for state in $Character.current_states():
+		$Character.get_node('Logging').text += "- %s\n" % state
 

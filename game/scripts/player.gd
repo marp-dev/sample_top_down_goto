@@ -1,7 +1,5 @@
 extends 'AI/parallel_state_machine_2D.gd'
 
-@onready var logging = ""
-@onready var label = $Logging/Label
 var SPEED = 17000
 var current_weapon
 
@@ -10,6 +8,7 @@ func _ready():
 	setup()
 	enter()
 	add_to_group("player")
+	
 
 func _input(event):
 	if Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right") or Input.is_action_pressed("ui_up") or Input.is_action_pressed("ui_down"):
@@ -20,13 +19,8 @@ func _input(event):
 	super._input(event)
 
 func _process(delta):
-	if not state_list.is_empty():
-		logging += "state: " + current_state() + "\n"
 	look_at(get_global_mouse_position())
 	super._process(delta)
-	$Logging.global_rotation_degrees = 0.0
-	label.text = logging
-	logging = ""
 
 func add_weapon(weapon):
 	if not weapon.is_in_group('weapon'):

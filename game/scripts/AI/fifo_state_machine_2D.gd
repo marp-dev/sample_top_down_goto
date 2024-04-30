@@ -116,3 +116,9 @@ func current_state():
 	if stack.is_empty():
 		return ""
 	return stack[0].name
+
+
+func current_states():
+	if stack.is_empty():
+		return []
+	return [stack[0].name]

@@ -30,17 +30,6 @@ shape = SubResource("1")
 [node name="RHandHold" type="Marker2D" parent="."]
 position = Vector2(16.9397, 23.3586)
 
-[node name="Logging" type="Node2D" parent="."]
-
-[node name="Label" type="Label" parent="Logging"]
-offset_left = 29.9169
-offset_top = -66.482
-offset_right = 116.917
-offset_bottom = -14.482
-text = "motion.x = 
-motion.y = "
-metadata/_edit_use_anchors_ = true
-
 [node name="states" type="Node2D" parent="."]
 
 [node name="STATE_IDLE" type="Node2D" parent="states"]
