@@ -61,10 +61,18 @@ func enter(state = DEFAULT_STATE, props = {}):
 	state_list[state] = state_node
 	if not state_list[state].on_finished.is_connected(finished):
 		state_list[state].on_finished.connect(finished)
+
 	if nested:
 		state_list[state].enter(call_name, props)
-		return
-	state_list[state].enter(props)
+	else:
+		state_list[state].enter(props)
+	
+	if (
+		String(state) != DEFAULT_STATE and
+		state_list.size() >= 2 and
+		state_list.has(DEFAULT_STATE)
+		):
+		exit(DEFAULT_STATE)
 
 
 func finished(state_name):
