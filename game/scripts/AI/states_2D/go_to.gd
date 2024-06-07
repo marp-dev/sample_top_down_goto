@@ -1,10 +1,8 @@
-extends Node
+extends 'state.gd'
 
-signal finished(ref)
 
 var UP
 var motion
-var parent
 var target_node
 var target
 var invalid = false
@@ -32,26 +30,12 @@ func exit(state_name = null):
 	halt()
 
 
-func handle_input(event):
-	pass
-
-
-func reconnect():
-	parent.handle_input.connect(handle_input)
-	parent.update.connect(update)
-
-
-func halt():
-	parent.handle_input.disconnect(handle_input)
-	parent.update.disconnect(update)
-
-
-func update(delta):
+func process(delta):
 	if invalid:
 		return false;
 	
 	if parent.global_position.distance_to(target) < 2:
-		finished.emit(name)
+		on_finished.emit(name)
 	
 	var direction = (target - parent.global_position).normalized()
 	var motion = direction * parent.SPEED * delta

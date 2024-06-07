@@ -1,10 +1,8 @@
-extends Node
+extends 'state.gd'
 
-signal finished(ref)
 
 #var UP
 var logging
-var parent
 var target
 
 
@@ -21,21 +19,11 @@ func exit(state_name = null):
 	halt()
 
 
-func handle_input(event):
+func input(event):
 	pass
 
 
-func reconnect():
-	parent.handle_input.connect(handle_input)
-	parent.update.connect(update)
-
-
-func halt():
-	parent.handle_input.disconnect(handle_input)
-	parent.update.disconnect(update)
-
-
-func update(delta):
+func process(delta):
 	if target:
 		var direction = (target.global_position - parent.global_position).normalized()
 		var distance = parent.global_position.distance_to(target.global_position)

@@ -7,13 +7,13 @@ var stack = []
 func _input(event):
 	if stack.is_empty():
 		return false
-	handle_input.emit(event)
+	on_input.emit(event)
 
 
 func _process(delta):
 	if stack.is_empty():
 		return false
-	update.emit(delta)
+	on_process.emit(delta)
 
 
 func enter(state = DEFAULT_STATE, props = {}):
@@ -66,15 +66,15 @@ func enter(state = DEFAULT_STATE, props = {}):
 	if not state_node:
 		return false
 	stack.push_front( state_node )
-	if not stack[0].finished.is_connected(on_finished):
-		stack[0].finished.connect(on_finished)
+	if not stack[0].on_finished.is_connected(finished):
+		stack[0].on_finished.connect(finished)
 	if nested:
 		stack[0].enter(call_name, props)
 		return
 	stack[0].enter(props)
 
 
-func on_finished(state_name):
+func finished(state_name):
 	exit(state_name)
 
 
@@ -83,7 +83,7 @@ func stop(state_name = null):
 		not stack.is_empty() and 
 		(not state_name or stack[0].name == state_name)
 		):
-		stack[0].finished.disconnect(on_finished)
+		stack[0].on_finished.disconnect(finished)
 		stack[0].exit(state_name)
 		stack.pop_front()
 
@@ -97,9 +97,9 @@ func exit(state_name = null):
 		enter()
 		return
 	if parent == self:
-		finished.emit(name)
+		on_finished.emit(name)
 		return
-	finished.emit(parent.get_node('states').get_path_to(self))
+	on_finished.emit(parent.get_node('states').get_path_to(self))
 
 
 func reconnect():

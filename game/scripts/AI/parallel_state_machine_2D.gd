@@ -7,13 +7,13 @@ var state_list = {}
 func _input(event):
 	if state_list.is_empty():
 		return false
-	handle_input.emit(event)
+	on_input.emit(event)
 
 
 func _process(delta):
 	if state_list.is_empty():
 		return false
-	update.emit(delta)
+	on_process.emit(delta)
 
 
 func enter(state = DEFAULT_STATE, props = {}):
@@ -59,21 +59,21 @@ func enter(state = DEFAULT_STATE, props = {}):
 		push_warning('state %s not found' % state)
 		return false
 	state_list[state] = state_node
-	if not state_list[state].finished.is_connected(on_finished):
-		state_list[state].finished.connect(on_finished)
+	if not state_list[state].on_finished.is_connected(finished):
+		state_list[state].on_finished.connect(finished)
 	if nested:
 		state_list[state].enter(call_name, props)
 		return
 	state_list[state].enter(props)
 
 
-func on_finished(state_name):
+func finished(state_name):
 	exit(state_name)
 
 
 func stop(state_name):
 	if state_list.has(state_name):
-		state_list[state_name].finished.disconnect(on_finished)
+		state_list[state_name].on_finished.disconnect(finished)
 		state_list[state_name].exit()
 		state_list.erase(state_name)
 
@@ -85,9 +85,9 @@ func exit(state_name):
 			enter()
 			return
 		if parent == self:
-			finished.emit(name)
+			on_finished.emit(name)
 			return
-		finished.emit(parent.get_node('states').get_path_to(self))
+		on_finished.emit(parent.get_node('states').get_path_to(self))
 
 
 func reconnect():

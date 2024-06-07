@@ -1,9 +1,9 @@
 extends CharacterBody2D
 
 
-signal update(delta)
-signal handle_input(event)
-signal finished(ref)
+signal on_process(delta)
+signal on_input(event)
+signal on_finished(ref)
 
 var DEFAULT_STATE = null
 var parent

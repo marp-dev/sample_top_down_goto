@@ -1,16 +1,25 @@
 extends Node
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+signal on_finished(ref)
+
+var parent
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+func reconnect():
+	parent.on_input.connect(input)
+	parent.on_process.connect(process)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func halt():
+	parent.on_input.disconnect(input)
+	parent.on_process.disconnect(process)
+
+
+func input(event):
+	pass
+
+
+func process(delta):
+	pass
+

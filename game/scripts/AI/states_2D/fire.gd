@@ -1,11 +1,9 @@
-extends Node
+extends 'state.gd'
 
-signal finished(ref)
 
 #var UP
 var motion
 var logging
-var parent
 var timer
 var weapon
 var bullet
@@ -38,21 +36,11 @@ func exit(state_name = null):
 	weapon = null
 
 
-func reconnect():
-	parent.handle_input.connect(handle_input)
-	parent.update.connect(update)
-
-
-func halt():
-	parent.handle_input.disconnect(handle_input)
-	parent.update.disconnect(update)
-
-
-func handle_input(event):
+func input(event):
 	#if Input.is_action_pressed("ui_fire"):
 	#	fire()
 	if Input.is_action_just_released("ui_fire"):
-		finished.emit(name)
+		on_finished.emit(name)
 
 
 func fire():
@@ -73,6 +61,6 @@ func fire():
 		return
 
 
-func update(delta):
+func process(delta):
 	fire()
 

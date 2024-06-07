@@ -1,11 +1,10 @@
-extends Node
+extends 'state.gd'
 
-signal finished(ref)
 
 #var UP
 var motion
 var logging
-var parent
+
 
 
 # Initialize the state. E.g. change the animation
@@ -22,17 +21,7 @@ func exit(state_name = null):
 	halt()
 
 
-func reconnect():
-	parent.handle_input.connect(handle_input)
-	parent.update.connect(update)
-
-
-func halt():
-	parent.handle_input.disconnect(handle_input)
-	parent.update.disconnect(update)
-
-
-func handle_input(event):
+func input(event):
 	if Input.is_action_pressed("ui_left") and Input.is_action_pressed("ui_right"):
 		motion.x = 0
 	elif Input.is_action_pressed("ui_left"):
@@ -51,10 +40,10 @@ func handle_input(event):
 	else:
 		motion.y = 0
 	if motion.x == 0 and motion.y == 0:
-		finished.emit(name)
+		on_finished.emit(name)
 
 
-func update(delta):
+func process(delta):
 	parent.set_velocity(motion * delta)
 	parent.move_and_slide()
 
