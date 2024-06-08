@@ -13,7 +13,7 @@ func _ready():
 	add_to_group("character")
 
 	if follow_to:
-		enter('STATE_FOLLOW', { "target": follow_to})
+		follow(follow_to)
 
 
 func _process(delta):
