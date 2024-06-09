@@ -17,6 +17,7 @@ top_level = true
 position = Vector2(14, 1)
 collision_mask = 7
 script = ExtResource("2")
+active = true
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 avoidance_enabled = true

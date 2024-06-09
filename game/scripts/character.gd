@@ -5,6 +5,7 @@ extends 'AI/parallel_state_machine_2D.gd'
 var SPEED = 17000
 @export var follow_to: NodePath
 var navigation_agent: NavigationAgent2D
+@export var active: bool
 
 
 func _ready():
@@ -22,11 +23,15 @@ func _ready():
 
 
 func _process(delta):
-	look_at(get_global_mouse_position())
+	if active:
+		look_at(get_global_mouse_position())
 	super._process(delta)
 
 
 func add_weapon(weapon):
+	if not active:
+		return
+		
 	if not weapon.is_in_group('weapon'):
 		weapon.queue_free()
 		return false
@@ -43,6 +48,9 @@ func has_weapon():
 
 
 func follow(target):
+	if not active:
+		return
+		
 	if(typeof(target) == TYPE_NODE_PATH):
 		follow_to = target
 	elif(typeof(target) == TYPE_OBJECT):
@@ -50,10 +58,16 @@ func follow(target):
 	enter('MOVEMENT/STATE_FOLLOW', { "target": follow_to})
 
 func go_to(target, obj = false, method = false):
+	if not active:
+		return
+		
 	enter('MOVEMENT/STATE_GOTO', { "target": target})
 
 
 func fire():
+	if not active:
+		return
+		
 	if not current_weapon:
 		return
 	if $AimRay.is_colliding() and $AimRay.get_collider().is_in_group('character'):
