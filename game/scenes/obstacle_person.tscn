@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://4ll13688c78f"]
+
+[ext_resource type="Texture2D" uid="uid://btxfhlm3kmjye" path="res://assets/spaceAstronauts_007.png" id="1_8r31m"]
+
+[node name="ObstablePerson" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_8r31m")
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+radius = 44.87
