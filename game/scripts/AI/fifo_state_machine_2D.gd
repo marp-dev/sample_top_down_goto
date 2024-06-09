@@ -16,6 +16,12 @@ func _process(delta):
 	on_process.emit(delta)
 
 
+func _physics_process(delta):
+	if stack.is_empty():
+		return false
+	on_physics_process.emit(delta)
+
+
 func enter(state = DEFAULT_STATE, props = {}):
 	if not state:
 		return

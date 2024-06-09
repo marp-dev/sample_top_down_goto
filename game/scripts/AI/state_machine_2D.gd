@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 
 signal on_process(delta)
+signal on_physics_process(delta)
 signal on_input(event)
 signal on_finished(ref)
 
