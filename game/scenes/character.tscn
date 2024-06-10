@@ -18,6 +18,11 @@ position = Vector2(14, 1)
 collision_mask = 7
 script = ExtResource("2")
 
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
+radius = 35.64
+max_speed = 100000.0
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-14.5952, -0.663406)
 texture = ExtResource("1")

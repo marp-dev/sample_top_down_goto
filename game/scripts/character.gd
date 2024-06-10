@@ -4,9 +4,14 @@ extends 'AI/parallel_state_machine_2D.gd'
 @onready var current_weapon = null
 var SPEED = 17000
 @export var follow_to: NodePath
+var navigation_agent: NavigationAgent2D
 
 
 func _ready():
+	navigation_agent = $NavigationAgent2D
+	navigation_agent.path_desired_distance = 2.0
+	navigation_agent.target_desired_distance = 2.0
+	
 	DEFAULT_STATE = 'STATE_IDLE'
 	setup()
 	enter()
