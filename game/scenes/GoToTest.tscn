@@ -1,8 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://br3itldou6tfm"]
+[gd_scene load_steps=6 format=3 uid="uid://br3itldou6tfm"]
 
 [ext_resource type="Script" path="res://scripts/GoToTest.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://dr5uiuuufocw" path="res://scenes/character.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://mm0xpstfdehi" path="res://scenes/TestBackground.tscn" id="3_rv7xx"]
+[ext_resource type="PackedScene" uid="uid://4ll13688c78f" path="res://scenes/obstacle_person.tscn" id="4_y7e6r"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_ku8cs"]
+vertices = PackedVector2Array(1000, 999, -1000, 999, -1000, -1001, 1000, -1001)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(1000, -1001, 1000, 999, -1000, 999, -1000, -1001)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+agent_radius = 0.0
 
 [node name="GoToTest" type="Node2D"]
 script = ExtResource("1")
@@ -11,4 +19,68 @@ script = ExtResource("1")
 
 [node name="Camera2D" type="Camera2D" parent="Character"]
 
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="Character/Camera2D"]
+visible = false
+position = Vector2(-14, -1)
+navigation_polygon = SubResource("NavigationPolygon_ku8cs")
+
 [node name="TestBackground" parent="." instance=ExtResource("3_rv7xx")]
+
+[node name="Obstacle" type="Node2D" parent="."]
+
+[node name="ObstaclePerson" parent="Obstacle" instance=ExtResource("4_y7e6r")]
+position = Vector2(202, -197)
+
+[node name="ObstaclePerson2" parent="Obstacle" instance=ExtResource("4_y7e6r")]
+position = Vector2(200, -3)
+
+[node name="ObstaclePerson3" parent="Obstacle" instance=ExtResource("4_y7e6r")]
+position = Vector2(198, 200)
+
+[node name="ObstaclePerson4" parent="Obstacle" instance=ExtResource("4_y7e6r")]
+position = Vector2(-173, -194)
+
+[node name="ObstaclePerson5" parent="Obstacle" instance=ExtResource("4_y7e6r")]
+position = Vector2(-175, 0)
+
+[node name="ObstaclePerson6" parent="Obstacle" instance=ExtResource("4_y7e6r")]
+position = Vector2(-177, 203)
+
+[node name="ObstaclePerson7" parent="Obstacle" instance=ExtResource("4_y7e6r")]
+position = Vector2(604, -199)
+
+[node name="ObstaclePerson8" parent="Obstacle" instance=ExtResource("4_y7e6r")]
+position = Vector2(602, -5)
+
+[node name="ObstaclePerson9" parent="Obstacle" instance=ExtResource("4_y7e6r")]
+position = Vector2(600, 198)
+
+[node name="ObstaclePerson11" parent="Obstacle" instance=ExtResource("4_y7e6r")]
+position = Vector2(-597, -3)
+
+[node name="ObstaclePerson12" parent="Obstacle" instance=ExtResource("4_y7e6r")]
+position = Vector2(-599, 200)
+
+[node name="Character2" parent="Obstacle" instance=ExtResource("2")]
+position = Vector2(14, 206)
+active = false
+
+[node name="Character3" parent="Obstacle" instance=ExtResource("2")]
+position = Vector2(18, -198)
+active = false
+
+[node name="Character4" parent="Obstacle" instance=ExtResource("2")]
+position = Vector2(420, 206)
+active = false
+
+[node name="Character5" parent="Obstacle" instance=ExtResource("2")]
+position = Vector2(424, -198)
+active = false
+
+[node name="Character6" parent="Obstacle" instance=ExtResource("2")]
+position = Vector2(-363, 206)
+active = false
+
+[node name="Character7" parent="Obstacle" instance=ExtResource("2")]
+position = Vector2(-359, -198)
+active = false
