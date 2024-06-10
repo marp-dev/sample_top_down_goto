@@ -24,8 +24,6 @@ visible = false
 position = Vector2(-14, -1)
 navigation_polygon = SubResource("NavigationPolygon_ku8cs")
 
-[node name="TestBackground" parent="." instance=ExtResource("3_rv7xx")]
-
 [node name="Obstacle" type="Node2D" parent="."]
 
 [node name="ObstaclePerson" parent="Obstacle" instance=ExtResource("4_y7e6r")]
@@ -84,3 +82,5 @@ active = false
 [node name="Character7" parent="Obstacle" instance=ExtResource("2")]
 position = Vector2(-359, -198)
 active = false
+
+[node name="TestBackground" parent="." instance=ExtResource("3_rv7xx")]
